@@ -1,6 +1,17 @@
 #include <iostream>
 
+void fetchNextInstruction()
+{
+    std::cout << "Instruction fetched\n";
+}
+
+void exexuteInstruction()
+{
+    std::cout << "Instruction executed\n";
+}
+
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    fetchNextInstruction();
+    exexuteInstruction();
     return 0;
 }
