@@ -5,13 +5,13 @@ void fetchNextInstruction()
     std::cout << "Instruction fetched\n";
 }
 
-void exexuteInstruction()
+void executeInstruction()
 {
     std::cout << "Instruction executed\n";
 }
 
 int main() {
     fetchNextInstruction();
-    exexuteInstruction();
+    executeInstruction();
     return 0;
 }
