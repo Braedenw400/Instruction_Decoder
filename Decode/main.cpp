@@ -38,8 +38,19 @@ void executeInstruction()
 
 int main() {
     //load memory
-    FILE * file = fopen("mem_in.txt", "r+");
-    if (file == nullptr) std::cout<<"file not found";
+    std::string line;
+    std::ifstream myfile ("mem_in.txt");
+    if(myfile.is_open())
+    {
+        while (getline (myfile, line)) {
+            std::cout << line;
+        }
+        myfile.close();
+    }
+    else
+    {
+        std::cout<<"file not found";
+    }
 
     /*while (memory[PC] != HALT_OPCODE)
     {
