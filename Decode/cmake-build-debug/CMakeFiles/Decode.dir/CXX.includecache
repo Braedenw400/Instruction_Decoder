@@ -9,4 +9,6 @@
 /home/braeden/Git/Instruction_Decoder/Instruction_Decoder/Decode/main.cpp
 iostream
 -
+fstream
+-
 
