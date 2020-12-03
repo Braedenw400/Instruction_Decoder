@@ -23,6 +23,12 @@ void fetchNextInstruction()
      * perform the increment
     */
 
+    for(int i = 0; i<sizeof(memory); i++)
+    {
+        i = IR;
+        std::cout<<IR;
+    }
+
     std::cout << "Instruction fetched\n";
 }
 
@@ -38,24 +44,25 @@ void executeInstruction()
 
 int main() {
     //load memory
-    std::string line;
-    std::ifstream myfile ("mem_in.txt");
+    std::ifstream myfile ("mem_in", std::ios::in|std::ios::binary|std::ios::ate);
     if(myfile.is_open())
     {
-        while (getline (myfile, line)) {
-            std::cout << line;
-        }
+        std::streampos size = myfile.tellg();
+        myfile.seekg(0, std::ios::beg);
+        myfile.read(reinterpret_cast<char *>(memory), size);
         myfile.close();
+
+        while (memory[PC] != HALT_OPCODE)
+        {
+            fetchNextInstruction();
+            //executeInstruction();
+        }
+
     }
     else
     {
         std::cout<<"file not found";
     }
 
-    /*while (memory[PC] != HALT_OPCODE)
-    {
-        fetchNextInstruction();
-        executeInstruction();
-    }*/
     return 0;
 }
