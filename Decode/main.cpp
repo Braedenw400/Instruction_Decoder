@@ -1,21 +1,18 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <string>
 
 
-#define HALT_OPCODE 19
+#define HALT_OPCODE "19"
 
 
 //Global registers/memory
 unsigned char memory[65536];
-unsigned char PC=0;    //program counter
-unsigned char IR;     //instruction register
-unsigned int MAR;   //memory address register
-unsigned char ACC;    //accumulator
-
-int it1 = 0;
-int it2 = 1;
-
+unsigned int PC = 0;     //program counter
+std::string IR;       //instruction register
+unsigned int MAR;       //memory address register
+unsigned char ACC;      //accumulator
 
 std::string hex2bin(unsigned char hex)  //converts hex to binary for opcodes
 {
@@ -59,6 +56,7 @@ std::string hex2bin(unsigned char hex)  //converts hex to binary for opcodes
     return nullptr;
 }
 
+
 void fetchNextInstruction()
 {
     //load memory from file into char array
@@ -81,10 +79,14 @@ void fetchNextInstruction()
      * determine from the instruction how much to increment PC so that it points to the next instruction in memory[]
      * perform the increment
     */
-
-    IR = memory[PC];
+    IR = "";
+    std::string tmp;
+    tmp = memory[PC];
+    IR.append(tmp);
+    tmp = memory[PC+=1];
+    IR.append(tmp);
+    PC+=2;
     std::cout<<IR;
-    PC++;
 }
 
 void executeInstruction()
@@ -94,17 +96,74 @@ void executeInstruction()
      * examine IR to determine which operation to perform
      * perform operation on data in the registers and in memory[]
      */
-    std::cout << "Instruction executed\n";
+
+    // memory operations
+    if(IR.substr(0, 1) == "0")
+    {
+        if(IR.substr(1,1) == "0")
+        {
+            //store acc operand used as address 00
+        }
+        else if (IR.substr(1, 1) == "1")
+        {
+            //store acc operand used as constant 01
+        }
+        else if (IR.substr(1, 1) == "2")
+        {
+            //store acc MAR used as pointer
+        }
+        else if (IR.substr(1, 1) == "4")
+        {
+            //store index register operand used as address 00
+        }
+        else if (IR.substr(1, 1) == "5")
+        {
+            //store index register MAR operand used as const 01
+        }
+        else if (IR.substr(1, 1) == "6")
+        {
+            //store index register MAR indirect (MAR used as pointer)
+        }
+        else if (IR.substr(1, 1) == "8")
+        {
+            //load acc operand used as address 00
+        }
+        else if (IR.substr(1, 1) == "9")
+        {
+            //load acc operand used as const 01
+        }
+        else if (IR.substr(1, 1) == "a")
+        {
+            //load acc indirect (MAR used as pointer)
+        }
+        else if (IR.substr(1, 1) == "c")
+        {
+            //load MAR operand as address 00
+        }
+        else if (IR.substr(1, 1) == "d")
+        {
+            //load MAR opearnd as const 01
+        }
+        else if (IR.substr(1, 1) == "e")
+        {
+            //load MAR indirect (MAR used as ptr)
+        }
+    }
+    else if(IR.substr(0, 1) != "0")
+    {
+
+    }
+
 }
 
 int main() {
-    fetchNextInstruction();
-    /*
-    while (memory[PC] != HALT_OPCODE)
+
+    while (IR != HALT_OPCODE)
     {
         fetchNextInstruction();
-        //executeInstruction();
-    }*/
+        std::cout<<"\n";
+        executeInstruction();
+    }
     return 0;
 }
 
