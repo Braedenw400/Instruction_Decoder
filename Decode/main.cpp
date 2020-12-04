@@ -13,7 +13,8 @@ unsigned char IR;     //instruction register
 unsigned int MAR;   //memory address register
 unsigned char ACC;    //accumulator
 
-
+int it1 = 0;
+int it2 = 1;
 
 
 std::string hex2bin(unsigned char hex)  //converts hex to binary for opcodes
