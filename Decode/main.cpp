@@ -216,7 +216,7 @@ void executeInstruction()
         }
         else if (IR.substr(1, 1) == "d")
         {
-            //load MAR opearnd as const 01
+            //load MAR operand as const 01
         }
         else if (IR.substr(1, 1) == "e")
         {
