@@ -10,9 +10,11 @@
 //Global registers/memory
 unsigned char memory[65536];
 unsigned int PC = 0;     //program counter
-std::string IR;       //instruction register
+//unsigned char IR;       //instruction register
+std::string IR;
 unsigned int MAR;       //memory address register
 unsigned char ACC;      //accumulator
+
 
 std::string hex2bin(unsigned char hex)  //converts hex to binary for opcodes
 {
@@ -72,6 +74,7 @@ void fetchNextInstruction()
     {
         std::cout<<"file not found";
     }
+
     /*
      * fetch function steps
      * use PC as an index to retrieve an instruction from memory[]
@@ -80,13 +83,84 @@ void fetchNextInstruction()
      * perform the increment
     */
     IR = "";
-    std::string tmp;
-    tmp = memory[PC];
-    IR.append(tmp);
-    tmp = memory[PC+=1];
-    IR.append(tmp);
+    std::string tmp1;
+    std::string tmp2;
+    tmp1 = memory[PC];
+    IR.append(tmp1);
+    tmp2 = memory[PC+=1];
+    IR.append(tmp2);
+
+    //if the first digit begins with 1, it is a math operation
+    if(tmp1 == "8" || tmp1 == "9" || tmp1 == "a" || tmp1 == "b" || tmp1 == "c" || tmp1 == "d" || tmp1 == "e" || tmp1 == "f")
+    {
+        if(tmp2 == "0")
+        {
+            //indirect mar used as ptr, indirect mar used as ptr
+        }
+        if(tmp2 == "1")
+        {
+            //indirect mar used as ptr, accumulator
+        }
+        if(tmp2 == "2")
+        {
+            //indirect mar used as ptr, 16 bit constant
+        }
+        if(tmp2 == "3")
+        {
+            //indirect mar used as ptr, 16 bit memory op
+        }
+        if(tmp2 == "4")
+        {
+            //acc, indirect mar used as ptr
+        }
+        if(tmp2 == "5")
+        {
+            //acc, acc
+        }
+        if(tmp2 == "6")
+        {
+            //acc, 8 bit const
+        }
+        if(tmp2 == "7")
+        {
+            //acc, 16 bit memory op
+        }
+        if(tmp2 == "8")
+        {
+            //address register mar, indirect mar used as pointer
+        }
+        if(tmp2 == "9")
+        {
+            //address register mar, acc
+        }
+        if(tmp2 == "a")
+        {
+            //address register mar, constant
+        }
+        if(tmp2 == "b")
+        {
+            //address register mar, memory
+        }
+        if(tmp2 == "c")
+        {
+            //memory, indirect mar used as ptr
+        }
+        if(tmp2 == "d")
+        {
+            //memory, acc
+        }
+        if(tmp2 == "e")
+        {
+            //memory, constant
+        }
+        if(tmp2 == "f")
+        {
+            //memory, memory
+        }
+    }
     PC+=2;
     std::cout<<IR;
+
 }
 
 void executeInstruction()
@@ -157,7 +231,6 @@ void executeInstruction()
 }
 
 int main() {
-
     while (IR != HALT_OPCODE)
     {
         fetchNextInstruction();
