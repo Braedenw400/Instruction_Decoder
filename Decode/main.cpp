@@ -82,13 +82,18 @@ void fetchNextInstruction()
      * determine from the instruction how much to increment PC so that it points to the next instruction in memory[]
      * perform the increment
     */
-    IR = "";
+    IR = "0x";
     std::string tmp1;
     std::string tmp2;
     tmp1 = memory[PC];
     IR.append(tmp1);
     tmp2 = memory[PC+=1];
     IR.append(tmp2);
+
+
+    //does convert to char, but breaks down the line since its a ptr
+    //char *IR_c = &IR[0];
+    //std::cout<<IR_c;
 
     //if the first digit begins with 1, it is a math operation
     if(tmp1 == "8" || tmp1 == "9" || tmp1 == "a" || tmp1 == "b" || tmp1 == "c" || tmp1 == "d" || tmp1 == "e" || tmp1 == "f")
