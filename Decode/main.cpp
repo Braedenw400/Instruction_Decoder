@@ -85,8 +85,8 @@ void fetchNextInstruction()
 
     //IR = "0x";
     IR = "";
-    std::string tmp1;
-    std::string tmp2;
+    std::string tmp1; //first element of IR
+    std::string tmp2; //second element of IR
     tmp1 = memory[PC];
     IR.append(tmp1);
     tmp2 = memory[PC+=1];
@@ -165,6 +165,110 @@ void fetchNextInstruction()
             //memory, memory
         }
     }
+    else if(tmp1 == "1") //branch/jump functions
+    {
+        if(tmp2 == "0")
+        {
+            //unconditional branch
+        }
+        if(tmp2 == "1")
+        {
+            //branch if acc = 0
+        }
+        if(tmp2 == "2")
+        {
+            //branch if acc != 0
+        }
+        if(tmp2 == "3")
+        {
+            //branch if acc < 0
+        }
+        if(tmp2 == "4")
+        {
+            //branch if acc <= 0
+        }
+        if(tmp2 == "5")
+        {
+            //branch if acc > 0
+        }
+        if(tmp2 == "6")
+        {
+            //branch if acc >= 0
+        }
+    }
+    // memory operations
+    else if(tmp1 == "0")
+    {
+        if(tmp2 == "0")
+        {
+            //store acc operand used as address
+        }
+        if(tmp2 == "1")
+        {
+
+        }
+        if(tmp2 == "2")
+        {
+
+        }
+        if(tmp2 == "3")
+        {
+
+        }
+        if(tmp2 == "4")
+        {
+
+        }
+        if(tmp2 == "5")
+        {
+
+        }
+        if(tmp2 == "6")
+        {
+
+        }
+        if(tmp2 == "7")
+        {
+
+        }
+        if(tmp2 == "8")
+        {
+
+        }
+        if(tmp2 == "9")
+        {
+
+        }
+        if(tmp2 == "a")
+        {
+
+        }
+        if(tmp2 == "b")
+        {
+
+        }
+        if(tmp2 == "c")
+        {
+
+        }
+        if(tmp2 == "d")
+        {
+
+        }
+        if(tmp2 == "e")
+        {
+
+        }
+        if(tmp2 == "f")
+        {
+
+        }
+    }
+    else
+        {
+        std::cout<<"illegal opcode";
+        }
+
     PC+=2;
     std::cout<<IR;
 
