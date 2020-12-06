@@ -16,7 +16,7 @@ unsigned int MAR;       //memory address register
 unsigned char ACC;      //accumulator
 
 
-std::string hex2bin(unsigned char hex)  //converts hex to binary for opcodes
+std::string hex2bin(unsigned char hex)  //converts hex to binary for opcodes, might need it later
 {
     switch(hex)
     {
@@ -82,7 +82,9 @@ void fetchNextInstruction()
      * determine from the instruction how much to increment PC so that it points to the next instruction in memory[]
      * perform the increment
     */
-    IR = "0x";
+
+    //IR = "0x";
+    IR = "";
     std::string tmp1;
     std::string tmp2;
     tmp1 = memory[PC];
@@ -91,7 +93,7 @@ void fetchNextInstruction()
     IR.append(tmp2);
 
 
-    //does convert to char, but breaks down the line since its a ptr
+    //does convert to char, but breaks down the line since its a ptr, also can't make IR unsigned
     //char *IR_c = &IR[0];
     //std::cout<<IR_c;
 
